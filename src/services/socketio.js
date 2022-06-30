@@ -21,7 +21,16 @@ export default class SocketioService {
     sendTxt(txt) {
         if (this.socket) {
             console.log('send ', txt);
-            this.socket.emit('message', txt);
+            this.socket.emit('message', { type: "TEXT", data: txt });
+        } else {
+            console.warn("no socket")
+        }
+    }
+
+    sendAudio(audio) {
+        if (this.socket) {
+            console.log('send ', audio);
+            this.socket.emit('message', { type: "AUDIO", data: audio });
         } else {
             console.warn("no socket")
         }

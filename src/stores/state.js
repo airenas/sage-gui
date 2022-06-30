@@ -56,7 +56,11 @@ export const stateStore = defineStore({
       });
     },
     sendTxt(txt) {
+      
       this.socket.sendTxt(txt)
+    },
+    sendAudio(audio) {
+      this.socket.sendAudio(audio)
     },
     disconnect() {
       if (this.socket) {

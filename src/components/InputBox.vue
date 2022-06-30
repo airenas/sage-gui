@@ -1,4 +1,5 @@
 <script setup>
+import Audio from './Audio.vue'
 import { storeToRefs } from 'pinia'
 import { stateStore } from '../stores/state'
 const { connected, sendTxt } = storeToRefs(stateStore())
@@ -28,6 +29,7 @@ export default {
     <div id="app">
       <input v-on:keyup.enter="onEnter" v-model="inputStr" :disabled="connected == false" />
     </div>
+    <Audio />
   </div>
 </template>
 
