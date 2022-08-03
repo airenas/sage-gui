@@ -25,11 +25,12 @@ export default {
 </script>
 
 <template>
-  <div class="greetings">
-    <div id="app">
-      <input v-on:keyup.enter="onEnter" v-model="inputStr" :disabled="connected == false" />
-    </div>
-    <Audio />
+  <div class="input">
+    <v-row>
+      <v-text-field v-on:keyup.enter="onEnter" v-model="inputStr" :disabled="connected == false"
+        placeholder="Rašykite arba paspauskite ir pasakykite ->" variant="outlined"></v-text-field>
+      <Audio></Audio>
+    </v-row>
   </div>
 </template>
 
@@ -44,15 +45,15 @@ h3 {
   font-size: 1.2rem;
 }
 
-.greetings h1,
-.greetings h3 {
+.input h1,
+.input h3 {
   text-align: center;
 }
 
 @media (min-width: 1024px) {
 
-  .greetings h1,
-  .greetings h3 {
+  .input h1,
+  .input h3 {
     text-align: left;
   }
 }
