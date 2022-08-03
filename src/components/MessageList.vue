@@ -1,17 +1,19 @@
 <script setup>
 import { storeToRefs } from 'pinia'
 import { stateStore } from '../stores/state'
+import TxtMessage from './TxtMessage.vue';
+import ImgMessage from './ImgMessage.vue';
 const { messages } = storeToRefs(stateStore())
 </script>
 
 <template>
   <div class="greetings">
-    <div v-for="item in messages">
+    <div v-for="item in messages" :key="item.id">
       <div v-if="item.type == 'SVG'">
-        <span>BOT:</span><p v-html="item.data"></p>
+        <ImgMessage :svg="item.data" :bot="item.who === 'BOT'"></ImgMessage>
       </div>
       <div v-else-if="item.type == 'TEXT'">
-        <span>BOT:</span><h1>{{ item.data }}</h1>
+        <TxtMessage :text="item.data" :bot="item.who === 'BOT'"></TxtMessage>
       </div>
       <div v-else>
         <span>BOT:</span>{{ item.type }} : {{ item.data }}

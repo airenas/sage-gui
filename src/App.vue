@@ -1,7 +1,7 @@
 <script setup>
 import Connect from './components/Connect.vue'
 import InputBox from './components/InputBox.vue'
-import Messages from './components/Messages.vue'
+import MessageList from './components/MessageList.vue'
 </script>
 
 <script>
@@ -32,7 +32,7 @@ export default {
 
   <main>
     <div class="wrapper">
-      <Messages/>
+      <MessageList/>
     </div>
     <div class="wrapper-main">
       <InputBox/>
