@@ -34,7 +34,7 @@ export default {
     <div class="wrapper">
       <Messages/>
     </div>
-    <div class="wrapper">
+    <div class="wrapper-main">
       <InputBox/>
     </div>
   </main>

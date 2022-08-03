@@ -1,12 +1,11 @@
 <script setup>
-import Audio from './Audio.vue'
-import { storeToRefs } from 'pinia'
-import { stateStore } from '../stores/state'
+import { storeToRefs } from 'pinia';
+import { stateStore } from '../stores/state';
+import Audio from './Audio.vue';
 const { connected, sendTxt } = storeToRefs(stateStore())
 </script>
 
 <script>
-import { stateStore } from '../stores/state'
 
 export default {
   name: 'InputBox',
@@ -35,26 +34,14 @@ export default {
 </template>
 
 <style scoped>
-h1 {
-  font-weight: 500;
-  font-size: 2.6rem;
-  top: -10px;
+.input {
+  padding-left: 20px;
+  min-width: 500px;
 }
 
-h3 {
-  font-size: 1.2rem;
+.input input {
+  font-size: 200% important !;
 }
 
-.input h1,
-.input h3 {
-  text-align: center;
-}
-
-@media (min-width: 1024px) {
-
-  .input h1,
-  .input h3 {
-    text-align: left;
-  }
-}
+@media (min-width: 1024px) {}
 </style>
