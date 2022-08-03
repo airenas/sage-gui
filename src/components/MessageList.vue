@@ -18,6 +18,9 @@ const { messages } = storeToRefs(stateStore())
       <div v-else>
         <span>BOT:</span>{{ item.type }} : {{ item.data }}
       </div>
+      <div v-if="item.showDivider" class="divider">
+        <v-divider></v-divider>
+      </div>
     </div>
     <!-- <div>
       <h3>{{ botStatus }}</h3>
@@ -39,6 +42,13 @@ h3 {
 .greetings h1,
 .greetings h3 {
   text-align: center;
+}
+
+.divider{
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 10%;
+  padding-right: 10%;
 }
 
 @media (min-width: 1024px) {

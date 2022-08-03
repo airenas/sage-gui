@@ -47,16 +47,22 @@ export const stateStore = defineStore({
           this.botStatus = data.data
         } 
         else {
-          const l = this.messages.length
+          let l = this.messages.length
           if (l > 6) {
             this.messages = this.messages.slice(l - 6)
+            l = this.messages.length
+          }
+          if (l > 0) {
+            console.log(data.who, this.messages[l-1].who)
+            if (data.who !== this.messages[l-1].who) {
+              this.messages[l-1].showDivider = true;
+            }
           }
           this.messages.push(data)
         }
       });
     },
     sendTxt(txt) {
-      
       this.socket.sendTxt(txt)
     },
     sendAudio(audio) {

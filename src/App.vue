@@ -1,5 +1,5 @@
 <script setup>
-import Connect from './components/Connect.vue'
+import ConnectPanel from './components/ConnectPanel.vue'
 import InputBox from './components/InputBox.vue'
 import MessageList from './components/MessageList.vue'
 </script>
@@ -26,16 +26,16 @@ export default {
     <img alt="Intelektika logo" class="logo" src="./assets/intelektika_logo.png" width="125" height="125" />
 
     <div class="wrapper">
-      <Connect msg="Hello!" />
+      <ConnectPanel />
     </div>
   </header>
 
   <main>
     <div class="wrapper">
-      <MessageList/>
+      <MessageList />
     </div>
     <div class="wrapper-main">
-      <InputBox/>
+      <InputBox />
     </div>
   </main>
 </template>

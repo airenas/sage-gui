@@ -36,12 +36,12 @@ export default {
 <style scoped>
 .input {
   padding-left: 20px;
-  padding-top: 20px;
+  padding-top: 40px;
   min-width: 600px;
 }
 
 .input input {
-  font-size: 200% important !;
+  font-size: 300% important !;
 }
 
 @media (min-width: 1024px) {}

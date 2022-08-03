@@ -55,7 +55,7 @@ export default {
   line-height: 1.1;
   margin-left: 5px;
   position: relative;
-  border: 2px solid #ccc;
+  border: 1px solid #ccc;
 }
 
 .message.user {

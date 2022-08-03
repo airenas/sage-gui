@@ -2,13 +2,6 @@
 import { storeToRefs } from 'pinia'
 import { stateStore } from '../stores/state'
 const { counter, status, url, connected, botStatus } = storeToRefs(stateStore())
-
-defineProps({
-  msg: {
-    type: String,
-    required: true
-  }
-}) 
 </script>
 
 <template>
