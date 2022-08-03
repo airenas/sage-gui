@@ -15,6 +15,7 @@ export default {
       audioContext: null,
       stream: null,
       lenData: 0,
+      lenDataStr: "",
       sampleRate: 16000,
       channels: 1,
       store: stateStore()
@@ -119,12 +120,16 @@ export default {
 </script>
 
 <template>
-  <div class="greetings">
-    <button @mousedown="mouseDown" @mouseup="mouseUp" @mouseleave="mouseUp">
-      {{ inputStr }}
-    </button>
-    <v-btn elevation="2">Olia</v-btn>
-    {{ lenData }}
+  <div>
+    <v-btn
+        class="ma-2"
+        color="green"
+        icon=""
+        size="x-large"
+        @mousedown="mouseDown" @mouseup="mouseUp" @mouseleave="mouseUp"
+      >{{ lenDataStr }}
+      <v-icon>mic</v-icon>
+      </v-btn>
   </div>
 </template>
 
