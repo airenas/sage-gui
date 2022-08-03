@@ -1,11 +1,10 @@
 <script setup>
-import { storeToRefs } from 'pinia'
-import { stateStore } from '../stores/state'
+import { storeToRefs } from 'pinia';
+import { stateStore } from '../stores/state';
 const { connected } = storeToRefs(stateStore())
 </script>
 
 <script>
-import { stateStore } from '../stores/state'
 
 export default {
   name: 'Audio',
@@ -13,7 +12,11 @@ export default {
     return {
       inputStr: 'olia',
       mediaRecorder: null,
+      audioContext: null,
+      stream: null,
       lenData: 0,
+      sampleRate: 16000,
+      channels: 1,
       store: stateStore()
     };
   },
@@ -23,38 +26,93 @@ export default {
       this.inputStr = 'down';
     },
     mouseUp(data) {
-      if (this.mediaRecorder) {
-        this.mediaRecorder.stop();
+      console.log('stop recording');
+      if (this.audioContext) {
+        this.audioContext.close().then(() => {
+          this.stopRecording();
+        });
+        this.stream.getTracks().forEach(function (track) {
+          track.stop();
+        });
       }
     },
     stopRecording() {
+      console.log('stopped recording');
       this.inputStr = 'up';
-      self.lenData = 0
+      this.lenData = 0;
+      this.stream = null;
+      this.audioContext = null;
     },
     start() {
-      navigator.mediaDevices.getUserMedia({ audio: { sampleRate: 16000, channelCount: 1 }, video: false }).then(this.startRecording);
+      navigator.mediaDevices.getUserMedia({ audio: { sampleRate: this.sampleRate, channelCount: this.channels }, video: false }).then(this.startRecording);
     },
     startRecording(stream) {
-      const options = { mimeType: 'audio/webm' };
-      this.mediaRecorder = new MediaRecorder(stream, options);
-
-      self = this
-      this.mediaRecorder.addEventListener('dataavailable', function (e) {
-        console.log("on data")
-
-        if (e.data.size > 0) {
-          self.lenData = self.lenData + e.data.size
-          self.store.sendAudio(e.data)
+      // const options = { mimeType: 'audio/webm' };
+      //const options = { mimeType: 'audio/wav' };
+      //this.mediaRecorder = new MediaRecorder(stream, options);
+      const audioContext = window.AudioContext || window.webkitAudioContext;
+      // this.audioContext = new audioContext({ sampleRate: 16000 });
+      this.audioContext = new audioContext();
+      console.log(stream);
+      const sampleRate = this.audioContext.sampleRate;
+      console.log("sampleRate", sampleRate);
+      const volume = this.audioContext.createGain();
+      console.log(volume);
+      const audioInput = this.audioContext.createMediaStreamSource(stream);
+      console.log(audioInput);
+      audioInput.connect(volume);
+      var bufferSize = 1024 * 8;
+      this.mediaRecorder = (this.audioContext.createScriptProcessor || this.audioContext.createJavaScriptNode).call(this.audioContext, bufferSize, this.channels, this.channels);
+      console.log(this.mediaRecorder);
+      var start = Date.now();
+      const self = this
+      this.mediaRecorder.onaudioprocess = function (e) {
+        console.log("recording");
+        var left = e.inputBuffer.getChannelData(0);
+        let la = new Float32Array(left);
+        console.log(la.length);
+        console.log(la);
+        if (la.length > 0) {
+          self.lenData = self.lenData + la.length
+          console.log(self.lenData);
+          var end = Date.now();
+          var rate = self.lenData / (end - start);
+          console.log(`Rate: ${rate}, time: ${end - start} ms`);
+          const pcmData = self.convertToPCM(left);
+          self.store.sendAudio(pcmData);
         }
-      });
+      }
+      volume.connect(this.mediaRecorder);
+      this.mediaRecorder.connect(this.audioContext.destination);
+      this.stream = stream;
+    },
 
-      this.mediaRecorder.addEventListener('stop', function () {
-        console.log("stop event")
-        self.stopRecording();
-      });
+    //   self = this
+    //   this.mediaRecorder.addEventListener('dataavailable', function (e) {
+    //   console.log("on data")
 
-      this.mediaRecorder.start(1000);
-      console.log("started")
+    //   if (e.data.size > 0) {
+    //     self.lenData = self.lenData + e.data.size
+    //     self.store.sendAudio(e.data)
+    //   }
+    // });
+
+    //   this.mediaRecorder.addEventListener('stop', function () {
+    //     console.log("stop event")
+    //     self.stopRecording();
+    //   });
+
+    //   this.mediaRecorder.start(1000);
+    //   console.log("started")
+    // },
+    convertToPCM(data) {
+      const res = new Int16Array(data.length);
+      for (var i = 0; i < data.length; i++) {
+        var n = data[i];
+        n = n < 0 ? n * 32768 : n * 32767;
+        res[i] = Math.max(-32768, Math.min(32768, n));
+      }
+      return res
     },
   },
 };
@@ -65,6 +123,7 @@ export default {
     <button @mousedown="mouseDown" @mouseup="mouseUp" @mouseleave="mouseUp">
       {{ inputStr }}
     </button>
+    <v-btn elevation="2">Olia</v-btn>
     {{ lenData }}
   </div>
 </template>
