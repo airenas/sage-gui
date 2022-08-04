@@ -42,6 +42,7 @@ export default {
 </template>
 
 <style scoped>
+@import './../assets/base.css';
 .message {
   clear: both;
   /* float: left; */
@@ -49,19 +50,24 @@ export default {
   -webkit-border-radius: 20px 20px 20px 0;
   -moz-border-radius: 20px 20px 20px 0;
   border-radius: 20px 20px 20px 0;
-  background: inherit;
+  background: var(--color-baloon-background);
   margin: 8px 0;
   font-size: 20px;
   line-height: 1.1;
   margin-left: 5px;
   position: relative;
-  border: 1px solid #ccc;
+  color: var(--color-baloon-text);
+  border: 1px solid var(--color-baloon-text);
 }
 
 .message.user {
   -webkit-border-radius: 20px 20px 0px 20px;
   -moz-border-radius: 20px 20px 0px 20px;
   border-radius: 20px 20px 0px 20px;
+  background: var(--color-baloon-background-user);
+  /* #95a5a6; */
+  color: var(--color-baloon-text-user);
+  /* #273746; */
 }
 
 .avatar {

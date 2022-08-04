@@ -47,8 +47,8 @@ h3 {
 .divider{
   padding-top: 15px;
   padding-bottom: 15px;
-  padding-left: 10%;
-  padding-right: 10%;
+  padding-left: 2%;
+  padding-right: 2%;
 }
 
 @media (min-width: 1024px) {
