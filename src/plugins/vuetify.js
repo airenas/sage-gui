@@ -1,18 +1,19 @@
 // Styles
-import '@mdi/font/css/materialdesignicons.css'
+import '@mdi/font/css/materialdesignicons.css';
 import 'material-design-icons-iconfont/dist/material-design-icons.css'; // Ensure your project is capable of 
-import 'vuetify/styles'
+import 'vuetify/styles';
 
 // Vuetify
-import { createVuetify } from 'vuetify'
-import { aliases, md } from 'vuetify/iconsets/md'
+import { createVuetify } from 'vuetify';
+import { aliases, md } from 'vuetify/iconsets/md';
+const mq = window.matchMedia('(prefers-color-scheme: dark)')
 
 // https://vuetifyjs.com/en/introduction/why-vuetify/#feature-guides
-export default createVuetify({
+export const vuetify = createVuetify({
   theme: {
     themes: {
       light: {
-        dark: true,
+        dark: mq.matches,
       },
     },
   },
@@ -23,4 +24,8 @@ export default createVuetify({
       md,
     },
   },
+})
+
+mq.addEventListener('change', (e) => {
+  vuetify.framework.theme.dark = e.matches
 })
