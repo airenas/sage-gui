@@ -29,7 +29,7 @@ export default class SocketioService {
 
     sendAudio(audio) {
         if (this.socket) {
-            console.log('send ', audio);
+            console.log('send audio');
             this.socket.emit('message', { type: "AUDIO", data: audio });
         } else {
             console.warn("no socket")

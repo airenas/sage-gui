@@ -18,15 +18,18 @@ export default {
       audioID: "",
       sampleRate: 16000,
       channels: 1,
-      store: stateStore()
+      store: stateStore(),
+      timer: null,
+      timeout: 10000,
     };
   },
   methods: {
     mouseDown() {
+      console.log('mouse down');
       this.start();
     },
     mouseUp() {
-      console.log('stop recording');
+      console.log('mouse up');
       if (this.audioContext) {
         this.audioContext.close().then(() => {
           this.stopRecording();
@@ -35,6 +38,7 @@ export default {
           track.stop();
         });
       }
+      this.clearTimer();
     },
     stopRecording() {
       console.log('stopped recording');
@@ -44,6 +48,12 @@ export default {
       this.audioContext = null;
       this.store.socketSrv.sendAudioEvent(false, this.audioID);
       this.audioID = "";
+    },
+    clearTimer() {
+      if (this.timer) {
+        clearTimeout(this.timer);
+      }
+      this.timer = null;
     },
     setAudioLen(len, rate) {
       this.audioLen = len;
@@ -61,6 +71,9 @@ export default {
         });
     },
     startRecording(stream) {
+      this.clearTimer();
+      this.timer = window.setTimeout(this.mouseUp, this.timeout);
+      console.log('start recording');
       const audioContext = window.AudioContext || window.webkitAudioContext;
       this.audioContext = new audioContext();
       const sampleRate = this.audioContext.sampleRate;

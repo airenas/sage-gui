@@ -37,7 +37,7 @@ export default {
 .input {
   padding-left: 20px;
   padding-top: 40px;
-  min-width: 600px;
+  min-width: 200px;
 }
 
 .input input {
