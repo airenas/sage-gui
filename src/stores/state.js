@@ -1,5 +1,5 @@
-import { defineStore } from 'pinia'
-import SocketioService from '../services/socketio'
+import { defineStore } from 'pinia';
+import SocketioService from '../services/socketio';
 
 export const stateStore = defineStore({
   id: 'state',
@@ -9,18 +9,24 @@ export const stateStore = defineStore({
     socket: null,
     messages: [],
     botStatus: '',
-    inputTxt: ''
+    inputTxt: '',
+
+    errorShowing: false,
+    errorMsg: ''
   }),
   getters: {
     count: (state) => state.counter,
     status: (state) => {
       if (state.connected) {
-        return "Connected"
+        return "Connected";
       }
-      return "Connecting ..."
+      return "Connecting ...";
     },
     url: () => {
-      return import.meta.env.VITE_APP_SOCKET_ENDPOINT
+      return import.meta.env.VITE_APP_SOCKET_ENDPOINT;
+    },
+    socketSrv: (state) => {
+      return state.socket;
     }
   },
   actions: {
@@ -76,6 +82,15 @@ export const stateStore = defineStore({
       if (this.socket) {
         this.socket.disconnect()
       }
-    }
+    },
+    showError(data) {
+      this.errorShowing = true;
+      this.errorMsg = data;
+    },
+    hideError() {
+      console.log("hide");
+      this.errorShowing = false;
+      this.errorMsg = "";
+    },
   }
 })

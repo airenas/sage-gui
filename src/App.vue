@@ -2,6 +2,7 @@
 import ConnectPanel from './components/ConnectPanel.vue'
 import InputBox from './components/InputBox.vue'
 import MessageList from './components/MessageList.vue'
+import ErrorDiv from './components/ErrorDiv.vue'
 </script>
 
 <script>
@@ -37,6 +38,7 @@ export default {
     <div class="wrapper-main">
       <InputBox />
     </div>
+    <ErrorDiv></ErrorDiv>
   </main>
 </template>
 

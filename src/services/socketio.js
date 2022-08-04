@@ -4,7 +4,7 @@ export default class SocketioService {
     socket = null;
     url = "";
 
-    constructor(url) {
+    constructor(url) {``
         this.url = url;
     }
 
@@ -31,6 +31,15 @@ export default class SocketioService {
         if (this.socket) {
             console.log('send ', audio);
             this.socket.emit('message', { type: "AUDIO", data: audio });
+        } else {
+            console.warn("no socket")
+        }
+    }
+
+    sendAudioEvent(start, id) {
+        if (this.socket) {
+            const msg = start ? "AUDIO_START" : "AUDIO_STOP"
+            this.socket.emit('message', { type: "EVENT", data: msg });
         } else {
             console.warn("no socket")
         }

@@ -15,6 +15,7 @@ export default {
       stream: null,
       audioLen: 0,
       audioLenStr: "",
+      audioID: "",
       sampleRate: 16000,
       channels: 1,
       store: stateStore()
@@ -41,6 +42,8 @@ export default {
       this.setAudioLen(0, this.sampleRate);
       this.stream = null;
       this.audioContext = null;
+      this.store.socketSrv.sendAudioEvent(false, this.audioID);
+      this.audioID = "";
     },
     setAudioLen(len, rate) {
       this.audioLen = len;
@@ -52,7 +55,10 @@ export default {
       }
     },
     start() {
-      navigator.mediaDevices.getUserMedia({ audio: { sampleRate: this.sampleRate, channelCount: this.channels }, video: false }).then(this.startRecording);
+      navigator.mediaDevices.getUserMedia({ audio: { sampleRate: this.sampleRate, channelCount: this.channels }, video: false })
+        .then(this.startRecording).catch(e => {
+          this.store.showError("Nepavyko prijungti/panaudoti mikrofono\n\n" + e)
+        });
     },
     startRecording(stream) {
       const audioContext = window.AudioContext || window.webkitAudioContext;
@@ -65,7 +71,9 @@ export default {
       var bufferSize = 1024 * 8;
       this.mediaRecorder = (this.audioContext.createScriptProcessor || this.audioContext.createJavaScriptNode).call(this.audioContext, bufferSize, this.channels, this.channels);
       var start = Date.now();
-      const self = this
+      const self = this;
+      this.audioID = Date.now().toString();
+      self.store.socketSrv.sendAudioEvent(true, this.audioID);
       this.mediaRecorder.onaudioprocess = function (e) {
         console.log("recording");
         var left = e.inputBuffer.getChannelData(0);
