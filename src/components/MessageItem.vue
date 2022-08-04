@@ -12,15 +12,12 @@ export default {
   name: 'MessageItem',
   data() {
     return {
-
     };
   },
   methods: {
   },
 };
 </script>
-
-
 
 <template>
   <div v-if="bot">

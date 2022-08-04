@@ -2,7 +2,7 @@
 import { storeToRefs } from 'pinia';
 import { stateStore } from '../stores/state';
 import AudioInput from './AudioInput.vue';
-const { connected } = storeToRefs(stateStore())
+const { connected, inputTxt } = storeToRefs(stateStore())
 </script>
 
 <script>
@@ -11,13 +11,13 @@ export default {
   name: 'InputBox',
   data() {
     return {
-      inputStr: '',
+      store: stateStore()
     };
   },
   methods: {
     onEnter() {
-      stateStore().sendTxt(this.inputStr)
-      this.inputStr = '';
+      stateStore().sendTxt(this.store.inputTxt);
+      this.store.setInputTxt('');
     },
   },
 };
@@ -26,7 +26,7 @@ export default {
 <template>
   <div class="input">
     <v-row>
-      <v-text-field v-on:keyup.enter="onEnter" v-model="inputStr" :disabled="connected == false"
+      <v-text-field v-on:keyup.enter="onEnter" v-model="inputTxt" :disabled="connected == false"
         placeholder="Rašykite arba spauskite ir kalbėkite ---->" variant="outlined"></v-text-field>
       <AudioInput></AudioInput>
     </v-row>

@@ -6,9 +6,10 @@ export const stateStore = defineStore({
   state: () => ({
     counter: 0,
     connected: false,
-    socket: null, 
+    socket: null,
     messages: [],
-    botStatus: ''
+    botStatus: '',
+    inputTxt: ''
   }),
   getters: {
     count: (state) => state.counter,
@@ -45,7 +46,7 @@ export const stateStore = defineStore({
         console.log('got message', data);
         if (data.type == "STATUS") {
           this.botStatus = data.data
-        } 
+        }
         else {
           let l = this.messages.length
           if (l > 6) {
@@ -53,9 +54,9 @@ export const stateStore = defineStore({
             l = this.messages.length
           }
           if (l > 0) {
-            console.log(data.who, this.messages[l-1].who)
-            if (data.who !== this.messages[l-1].who) {
-              this.messages[l-1].showDivider = true;
+            console.log(data.who, this.messages[l - 1].who)
+            if (data.who !== this.messages[l - 1].who) {
+              this.messages[l - 1].showDivider = true;
             }
           }
           this.messages.push(data)
@@ -64,6 +65,9 @@ export const stateStore = defineStore({
     },
     sendTxt(txt) {
       this.socket.sendTxt(txt)
+    },
+    setInputTxt(txt) {
+      this.inputTxt = txt;
     },
     sendAudio(audio) {
       this.socket.sendAudio(audio)
