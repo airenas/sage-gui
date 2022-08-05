@@ -74,3 +74,13 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.inactive {
+  transition: opacity 3s;
+  opacity: 0.5;
+}
+
+.active {
+  transition: opacity 3s;
+  opacity: 1;
+}

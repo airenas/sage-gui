@@ -4,7 +4,6 @@ import SocketioService from '../services/socketio';
 export const stateStore = defineStore({
   id: 'state',
   state: () => ({
-    counter: 0,
     connected: false,
     socket: null,
     messages: [],
@@ -30,14 +29,10 @@ export const stateStore = defineStore({
     }
   },
   actions: {
-    incConn() {
-      this.counter++
-    },
     setConnected(value) {
       this.connected = value
     },
     connect() {
-      this.counter++
       this.socket = new SocketioService(this.url)
       this.socket.setupSocketConnection()
       this.socket.socket.on("connect", () => {

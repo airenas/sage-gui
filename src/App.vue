@@ -1,12 +1,14 @@
 <script setup>
-import ConnectPanel from './components/ConnectPanel.vue'
-import InputBox from './components/InputBox.vue'
-import MessageList from './components/MessageList.vue'
-import ErrorDiv from './components/ErrorDiv.vue'
+import { storeToRefs } from 'pinia';
+import { stateStore } from './stores/state';
+import ConnectPanel from './components/ConnectPanel.vue';
+import ErrorDiv from './components/ErrorDiv.vue';
+import InputBox from './components/InputBox.vue';
+import MessageList from './components/MessageList.vue';
+const { connected } = storeToRefs(stateStore())
 </script>
 
 <script>
-import { stateStore } from './stores/state'
 
 export default {
   mounted() {
@@ -24,19 +26,21 @@ export default {
 
 <template>
   <header>
-    <img alt="Intelektika logo" class="logo" src="./assets/intelektika_logo.png" width="125" height="125" />
-
+    <img alt="Intelektika logo" class="logo" :class="[connected ? 'inactive logo-small' : 'active logo-big']"
+      src="./assets/intelektika_logo.png" />
     <div class="wrapper">
       <ConnectPanel />
     </div>
   </header>
 
   <main>
-    <div class="wrapper">
-      <MessageList />
-    </div>
-    <div class="wrapper-main">
-      <InputBox />
+    <div class="messages">
+      <div class="wrapper" :class="[connected ? 'active' : 'inactive']">
+        <MessageList />
+      </div>
+      <div class="wrapper-main" :class="[connected ? 'active' : 'inactive']">
+        <InputBox />
+      </div>
     </div>
     <ErrorDiv></ErrorDiv>
   </main>
@@ -62,6 +66,18 @@ header {
   margin: 0 auto 2rem;
 }
 
+.logo-big {
+  transition: 3s;
+  width: 125px;
+  height: 125px;
+}
+
+.logo-small {
+  transition: 3s;
+  width: 50px;
+  height: 50px;
+}
+
 a,
 .green {
   text-decoration: none;
@@ -73,6 +89,12 @@ a,
   a:hover {
     background-color: hsla(160, 100%, 37%, 0.2);
   }
+}
+
+.messages {
+  margin: auto;
+  place-items: center;
+  max-width: 700px;
 }
 
 @media (min-width: 1024px) {

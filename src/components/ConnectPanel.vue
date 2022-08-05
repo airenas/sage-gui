@@ -1,38 +1,34 @@
 <script setup>
 import { storeToRefs } from 'pinia'
 import { stateStore } from '../stores/state'
-const { counter, status, url, connected, botStatus } = storeToRefs(stateStore())
+const { url, connected, botStatus } = storeToRefs(stateStore())
 </script>
 
 <template>
-  <div class="greetings">
-    <h3 v-if="connected" class="green">{{ status }}</h3>
-    <h1 v-if="connected" class="green">... {{ botStatus }}</h1>
-    <h3 v-if="!connected" class="green">Connecting to {{ url }}. Count: {{ counter }}</h3>
+  <div class="greetings" :class="[connected ? 'inactive' : 'active']">
+    <!-- <h3 v-if="connected" class="green" :class="{ inactive: connected }">{{ status }}</h3> -->
+    <div v-if="connected" class="green">... {{ botStatus }}</div>
+    <div v-if="!connected" class="green">Connecting to {{ url }}</div>
   </div>
 </template>
 
 <style scoped>
-h1 {
-  font-weight: 500;
-  font-size: 2.6rem;
-  top: -10px;
-}
+@import './../assets/base.css';
 
-h3 {
-  font-size: 1.2rem;
-}
-
-.greetings h1,
-.greetings h3 {
+.greetings {
   text-align: center;
+  font-weight: 500;
 }
 
-@media (min-width: 1024px) {
-
-  .greetings h1,
-  .greetings h3 {
-    text-align: left;
-  }
+.greetings.inactive {
+  transition: 3s;
+  font-size: 200%;
 }
+
+.greetings.active {
+  transition: 3s;
+  font-size: 140%;
+}
+
+@media (min-width: 1024px) {}
 </style>
