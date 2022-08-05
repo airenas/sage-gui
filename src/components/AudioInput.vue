@@ -21,6 +21,7 @@ export default {
       store: stateStore(),
       timer: null,
       timeout: 10000,
+      working: false,
     };
   },
   methods: {
@@ -42,7 +43,7 @@ export default {
     },
     stopRecording() {
       console.log('stopped recording');
-      this.inputStr = 'up';
+      this.working = false;
       this.setAudioLen(0, this.sampleRate);
       this.stream = null;
       this.audioContext = null;
@@ -71,6 +72,10 @@ export default {
         });
     },
     startRecording(stream) {
+      if (this.working) {
+        return
+      }
+      this.working = true;
       this.clearTimer();
       this.timer = window.setTimeout(this.mouseUp, this.timeout);
       console.log('start recording');
@@ -121,8 +126,8 @@ export default {
 
 <template>
   <div class="mic-button">
-    <v-btn class="ma-2" :color="audioLenStr === '' ? 'green' : 'error'" rounded size="x-large" @mousedown="mouseDown"
-      @mouseup="mouseUp" @mouseleave="mouseUp" :disabled="connected == false">{{ audioLenStr }}
+    <v-btn class="ma-2" :color="audioLenStr === '' ? 'green' : 'error'" rounded size="x-large" @mousedown.left="mouseDown"
+      @mouseup.left="mouseUp" @mouseleave="mouseUp" :disabled="connected == false">{{ audioLenStr }}
       <v-icon v-if="audioLenStr === ''">mic</v-icon>
     </v-btn>
   </div>
