@@ -26,10 +26,12 @@ export default {
 
 <template>
   <header>
-    <img alt="Intelektika logo" class="logo" :class="[connected ? 'inactive logo-small' : 'active logo-big']"
-      src="./assets/intelektika_logo.png" />
-    <div class="wrapper">
-      <ConnectPanel />
+    <div class="header-container">
+      <img alt="Intelektika logo" class="logo" :class="[connected ? 'inactive logo-small' : 'active logo-big']"
+        src="./assets/intelektika_logo.png" />
+      <div class="wrapper">
+        <ConnectPanel />
+      </div>
     </div>
   </header>
 
@@ -57,13 +59,9 @@ export default {
   font-weight: normal;
 }
 
-header {
-  line-height: 1.5;
-}
-
 .logo {
   display: block;
-  margin: 0 auto 2rem;
+  margin: 0 auto 1rem;
 }
 
 .logo-big {
@@ -107,6 +105,7 @@ a,
     display: grid;
     grid-template-columns: 1fr 1fr;
     padding: 0 2rem;
+    width: 100%;
   }
 
   header {
@@ -115,14 +114,14 @@ a,
     padding-right: calc(var(--section-gap) / 2);
   }
 
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
+  .header-container {
+    width: 100%;
+    display: grid;
+    justify-content: right;
   }
 
   .logo {
-    margin: 0 2rem 0 0;
+    margin: 0px 20px 20px auto;
   }
 }
 </style>
