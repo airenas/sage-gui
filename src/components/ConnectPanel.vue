@@ -8,8 +8,11 @@ const { url, connected, botStatus } = storeToRefs(stateStore())
   <div class="greetings" :class="[connected ? 'inactive' : 'active']">
     <!-- <h3 v-if="connected" class="green" :class="{ inactive: connected }">{{ status }}</h3> -->
     <div v-if="connected" class="green">... {{ botStatus }}</div>
-    <div v-if="!connected" class="green">Connecting to {{ url }}</div>
-    <v-progress-linear  v-if="!connected" color="green" indeterminate rounded height="5"></v-progress-linear>
+    <div class="connecting" v-if="!connected">
+      <div class="green connecting-info">Connecting to {{ url }}</div>
+      <v-progress-circular color="hsla(160, 100%, 37%, 1)" indeterminate rounded height="5"></v-progress-circular>
+    </div>
+     <!-- <v-progress-linear color="hsla(160, 100%, 37%, 1)" indeterminate rounded height="5"></v-progress-linear> -->
   </div>
 </template>
 
@@ -29,6 +32,14 @@ const { url, connected, botStatus } = storeToRefs(stateStore())
 .greetings.active {
   transition: 3s;
   font-size: 140%;
+}
+
+.connecting {
+  display: inline-flex;
+}
+
+.connecting-info {
+  margin-right: 10px;
 }
 
 @media (min-width: 1024px) {}
