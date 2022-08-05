@@ -9,6 +9,7 @@ const { url, connected, botStatus } = storeToRefs(stateStore())
     <!-- <h3 v-if="connected" class="green" :class="{ inactive: connected }">{{ status }}</h3> -->
     <div v-if="connected" class="green">... {{ botStatus }}</div>
     <div v-if="!connected" class="green">Connecting to {{ url }}</div>
+    <v-progress-linear  v-if="!connected" color="green" indeterminate rounded height="5"></v-progress-linear>
   </div>
 </template>
 
