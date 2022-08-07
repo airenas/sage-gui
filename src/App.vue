@@ -20,7 +20,7 @@ export default {
   },
   beforeUnmount() {
     stateStore().disconnect();
-  }
+  } 
 };
 </script>
 
