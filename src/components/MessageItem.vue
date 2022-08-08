@@ -22,7 +22,7 @@ export default {
 <template>
   <div v-if="bot">
     <v-row align="center">
-      <div class="avatar"><span class="av-name">B</span></div>
+      <div class="avatar"><span class="av-name">{{ $t('avatar.bot') }}</span></div>
       <div class="message">
         <slot></slot>
       </div>
@@ -33,13 +33,14 @@ export default {
       <div class="message user">
         <slot></slot>
       </div>
-      <div class="avatar user"><span class="av-name">U</span></div>
+      <div class="avatar user"><span class="av-name">{{ $t('avatar.user') }}</span></div>
     </v-row>
   </div>
 </template>
 
 <style scoped>
 @import './../assets/base.css';
+
 .message {
   clear: both;
   /* float: left; */

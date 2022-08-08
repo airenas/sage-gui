@@ -1,7 +1,12 @@
 {
-    "menu": {},
+    "avatar": {
+        "bot": "R",
+        "user": "V"
+    },
     "status": {
-        "waiting": "klausau"
+        "waiting": "klausau",
+        "saying": "kalbu",
+        "thinking": "mąstau"
     },
     "input": {
         "placeholder": "Rašykite arba spauskite ir kalbėkite ---->"

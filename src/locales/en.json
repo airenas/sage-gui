@@ -1,7 +1,12 @@
 {
-    "menu": {},
+    "avatar": {
+        "bot": "B",
+        "user": "U"
+    },
     "status": {
-        "waiting": "waiting"
+        "waiting": "waiting",
+        "saying": "saying",
+        "thinking": "thinking"
     },
     "input": {
         "placeholder": "Write or press and speak ---->"
