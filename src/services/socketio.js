@@ -1,10 +1,8 @@
 import { io } from 'socket.io-client';
 
 export default class SocketioService {
-    socket = null;
-    url = "";
-
-    constructor(url) {``
+    constructor(url) {
+        this.socket = null;
         this.url = url;
     }
 
@@ -39,7 +37,7 @@ export default class SocketioService {
     sendAudioEvent(start, id) {
         if (this.socket) {
             const msg = start ? "AUDIO_START" : "AUDIO_STOP"
-            this.socket.emit('message', { type: "EVENT", data: msg });
+            this.socket.emit('message', { type: "EVENT", data: msg, id: id });
         } else {
             console.warn("no socket")
         }
