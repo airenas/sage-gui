@@ -6,7 +6,7 @@ Voice to voice bot GUI
 ## Project Setup
 
 ```sh
-npm install
+make init
 ```
 
 ### Compile and Hot-Reload for Development
