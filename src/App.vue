@@ -1,18 +1,24 @@
 <script setup>
 import { storeToRefs } from 'pinia';
-import { stateStore } from './stores/state';
 import ConnectPanel from './components/ConnectPanel.vue';
 import ErrorDiv from './components/ErrorDiv.vue';
 import InputBox from './components/InputBox.vue';
 import MessageList from './components/MessageList.vue';
+import { stateStore } from './stores/state';
 const { connected } = storeToRefs(stateStore())
 </script>
 
 <script>
+import { useI18n } from 'vue-i18n';
 
 export default {
   mounted() {
     console.log('mounted');
+    const { t } = useI18n({
+      inheritLocale: true,
+      useScope: 'global'
+    })
+    document.title = t('main.title');
   },
   created() {
     console.log('created');
@@ -20,7 +26,7 @@ export default {
   },
   beforeUnmount() {
     stateStore().disconnect();
-  } 
+  }
 };
 </script>
 
