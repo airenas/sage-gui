@@ -1,3 +1,5 @@
+[![Node.js CI](https://github.com/airenas/sage-gui/actions/workflows/node.js.yml/badge.svg)](https://github.com/airenas/sage-gui/actions/workflows/node.js.yml)
+
 # sage-gui
 
 Voice to voice bot GUI
