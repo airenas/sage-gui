@@ -26,11 +26,18 @@ export default {
   },
   methods: {
     mouseDown() {
-      console.log('mouse down');
+      console.debug('mouse down');
       this.start();
     },
+    mouseLeave() {
+      console.debug('mouse leave');
+      this.stop();
+    },
     mouseUp() {
-      console.log('mouse up');
+      console.debug('mouse up');
+      this.stop();
+    },
+    stop() {
       if (this.audioContext) {
         this.audioContext.close().then(() => {
           this.stopRecording();
@@ -42,7 +49,7 @@ export default {
       this.clearTimer();
     },
     stopRecording() {
-      console.log('stopped recording');
+      console.debug('stopped recording');
       this.working = false;
       this.setAudioLen(0, this.sampleRate);
       this.stream = null;
@@ -127,7 +134,7 @@ export default {
 <template>
   <div class="mic-button">
     <v-btn class="ma-2" :color="audioLenStr === '' ? 'green' : 'error'" rounded size="x-large" @mousedown.left="mouseDown"
-      @mouseup.left="mouseUp" @mouseleave="mouseUp" :disabled="connected == false">{{ audioLenStr }}
+      @mouseup.left="mouseUp" @mouseleave="mouseLeave" :disabled="connected == false">{{ audioLenStr }}
       <v-icon v-if="audioLenStr === ''">mic</v-icon>
     </v-btn>
   </div>
