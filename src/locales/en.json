@@ -3,7 +3,11 @@
     "status": {
         "waiting": "waiting"
     },
+    "input": {
+        "placeholder": "Write or press and speak ---->"
+    },
     "main": {
-        "title": "Voice Bot Demo"
+        "title": "Voice Bot Demo",
+        "connecting": "Connecting to {url}"
     }
 }

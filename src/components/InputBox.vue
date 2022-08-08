@@ -27,7 +27,7 @@ export default {
   <div class="input">
     <v-row>
       <v-text-field v-on:keyup.enter="onEnter" v-model="inputTxt" :disabled="connected == false"
-        placeholder="Rašykite arba spauskite ir kalbėkite ---->" variant="outlined"></v-text-field>
+        :placeholder="$t('input.placeholder')" variant="outlined"></v-text-field>
       <AudioInput></AudioInput>
     </v-row>
   </div>

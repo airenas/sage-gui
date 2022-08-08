@@ -3,7 +3,11 @@
     "status": {
         "waiting": "klausau"
     },
+    "input": {
+        "placeholder": "Rašykite arba spauskite ir kalbėkite ---->"
+    },
     "main": {
-        "title": "Kalbančio Roboto Demo"
+        "title": "Kalbančio Roboto Demo",
+        "connecting": "Jungiuosi prie {url}"
     }
 }
