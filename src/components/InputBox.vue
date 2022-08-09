@@ -27,7 +27,7 @@ export default {
   <div class="input">
     <v-row>
       <v-text-field v-on:keyup.enter="onEnter" v-model="inputTxt" :disabled="connected == false"
-        :placeholder="$t('input.placeholder')" variant="outlined"></v-text-field>
+        :placeholder="$t('input.placeholder')" variant="outlined" class="input-box"></v-text-field>
       <AudioInput></AudioInput>
     </v-row>
   </div>
@@ -39,9 +39,15 @@ export default {
   padding-top: 40px;
   min-width: 200px;
 }
+</style>
 
-.input input {
-  font-size: 300% important !;
+<style>
+.v-input.input-box input {
+  font-size: 140%;
+}
+
+.v-field__field {
+  padding-top: 10px !important;
 }
 
 @media (min-width: 1024px) {}

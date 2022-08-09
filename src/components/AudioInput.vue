@@ -171,7 +171,7 @@ export default {
 
 .recording-text {
   font-weight: 600;
-  font-size: 140%;
+  font-size: 130%;
   padding: 0 0 0 0;
   text-indent: 0px;
 }
