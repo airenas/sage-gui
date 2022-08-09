@@ -33,7 +33,7 @@ export default {
       <div class="message user">
         <slot></slot>
       </div>
-      <div class="avatar user"><span class="av-name">{{ $t('avatar.user') }}</span></div>
+      <!-- <div class="avatar user"><span class="av-name">{{ $t('avatar.user') }}</span></div> -->
     </v-row>
   </div>
 </template>
@@ -55,7 +55,7 @@ export default {
   margin-left: 5px;
   position: relative;
   color: var(--color-baloon-text);
-  border: 1px solid var(--color-baloon-text);
+  border: 1px solid var(--color-baloon-background); 
 }
 
 .message.user {
@@ -65,7 +65,7 @@ export default {
   background: var(--color-baloon-background-user);
   /* #95a5a6; */
   color: var(--color-baloon-text-user);
-  /* #273746; */
+  border: 1px solid var(--color-baloon-background-user); 
 }
 
 .avatar {
@@ -73,8 +73,9 @@ export default {
   height: 25px;
   background-position: top center;
   border-radius: 50%;
-  background-color: blueviolet;
-  font-size: 80%;
+  background-color: var(--color-avatar);
+  color: var(--color-avatar-text);
+  font-size: 100%;
   align-content: center;
   display: flex;
   text-align: center;

@@ -69,7 +69,7 @@ export default {
         this.audioLenStr = ""
       } else {
         const l = len / rate;
-        this.audioLenStr = l.toFixed(1).toString() + "s";
+        this.audioLenStr = this.toSecStr(l.toFixed(0));
       }
     },
     start() {
@@ -127,22 +127,53 @@ export default {
       }
       return res
     },
+    toSecStr(sec) {
+      const m = (sec / 60).toFixed(0)
+      const s = sec - m * 60
+      if (s < 10) {
+        return m.toString() + ":0" + s.toString()
+      }
+      return m.toString() + ":" + s.toString()
+    },
   },
 };
 </script>
 
 <template>
   <div class="mic-button">
-    <v-btn class="ma-2" :color="audioLenStr === '' ? 'green' : 'error'" rounded size="x-large" @mousedown.left="mouseDown"
-      @mouseup.left="mouseUp" @mouseleave="mouseLeave" :disabled="connected == false">{{ audioLenStr }}
+    <v-btn class="ma-2" :class="audioLenStr === '' ? 'stopped' : 'recording'" rounded size="x-large"
+      @mousedown.left="mouseDown" @mouseup.left="mouseUp" @mouseleave="mouseLeave" :disabled="connected == false"><span class="recording-text">{{
+          audioLenStr
+      }}</span>
       <v-icon v-if="audioLenStr === ''">mic</v-icon>
     </v-btn>
   </div>
 </template>
 
 <style scoped>
+@import './../assets/base.css';
+
 .mic-button {
   top: -5px;
+}
+
+.recording {
+  background-color: #EF5350;
+  color: var(--vt-c-white);
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.stopped {
+  background-color: var(--color-green);
+  color: var(--vt-c-black);
+}
+
+.recording-text {
+  font-weight: 600;
+  font-size: 140%;
+  padding: 0 0 0 0;
+  text-indent: 0px;
 }
 
 @media (min-width: 1024px) {}

@@ -85,7 +85,7 @@ export default {
 a,
 .green {
   text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
+  color: var(--color-green);
   transition: 0.4s;
 }
 
