@@ -5,6 +5,10 @@ defineProps({
     type: String,
     required: true
   },
+  res: {
+    type: String,
+    required: false
+  },
   bot: {
     type: Boolean,
     default: true
@@ -19,7 +23,7 @@ export default {
   data() {
     return {
       url: null,
-      blob: null,   
+      blob: null,
     };
   },
   beforeMount() {
@@ -28,7 +32,7 @@ export default {
     this.url = URL.createObjectURL(this.blob);
   },
   unmounted() {
-    if (this.url){
+    if (this.url) {
       URL.revokeObjectURL(this.url);
     }
     this.blob = null;
@@ -44,10 +48,24 @@ export default {
 
 <template>
   <MessageItem :bot="bot">
-    <img :src="url" />
+    <div class="formula-res">
+      <img :src="url" />
+      <span class="result-span" v-if="res !== ''"> = {{ res }}</span>
+    </div>
   </MessageItem>
 </template>
 
 <style scoped>
+.formula-res {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  row-gap: 10px;
+}
+
+.result-span {
+  padding-left: 8px;
+}
+
 @media (min-width: 1024px) {}
 </style>

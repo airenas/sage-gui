@@ -10,7 +10,7 @@ const { messages } = storeToRefs(stateStore())
   <div class="greetings">
     <div v-for="item in messages" :key="item.id">
       <div v-if="item.type == 'SVG'">
-        <ImgMessage :svg="item.data" :bot="item.who === 'BOT'"></ImgMessage>
+        <ImgMessage :svg="item.data" :res="item.data2" :bot="item.who === 'BOT'"></ImgMessage>
       </div>
       <div v-else-if="item.type == 'TEXT'">
         <TxtMessage :text="item.data" :bot="item.who === 'BOT'"></TxtMessage>

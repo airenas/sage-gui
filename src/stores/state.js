@@ -47,6 +47,8 @@ export const stateStore = defineStore({
         console.log('got message', data);
         if (data.type == "STATUS") {
           this.botStatus = data.data
+        } else if (data.type == "TEXT_RESULT") {
+          // ignore
         } else if (data.who == "RECOGNIZER") {
           this.inputTxt = data.data
         }
