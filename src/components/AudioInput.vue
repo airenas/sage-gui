@@ -5,6 +5,7 @@ const { connected } = storeToRefs(stateStore())
 </script>
 
 <script>
+import { i18n } from '../i18n';
 import AudioProcessor from '../services/audio';
 
 export default {
@@ -77,16 +78,16 @@ export default {
     start() {
       navigator.mediaDevices.getUserMedia({
         audio: {
-          sampleRate: this.sampleRate, 
+          sampleRate: this.sampleRate,
           channelCount: this.channels,
           echoCancellation: true,
           autoGainControl: false,
           noiseSuppression: true
-        }, 
+        },
         video: false
       })
         .then(this.startRecording).catch(e => {
-          this.store.showError("Nepavyko prijungti/panaudoti mikrofono\n\n" + e)
+          this.store.showError(i18n.global.t('input.micError', { err: e }))
         });
     },
     startRecording(stream) {

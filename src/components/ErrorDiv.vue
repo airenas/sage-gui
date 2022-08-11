@@ -24,10 +24,11 @@ export default {
 <template>
   <div class="text-center">
     <v-snackbar v-model="errorShowing" multi-line>
-      {{ errorMsg }}
+      <span class="err-msg">
+        {{ errorMsg }}</span>
       <template v-slot:actions>
         <v-btn color="red" variant="text" @click="hide">
-          Close
+          {{ $t('main.close') }}
         </v-btn>
       </template>
     </v-snackbar>
@@ -35,5 +36,11 @@ export default {
 </template>
 
 <style scoped>
+@import './../assets/base.css';
+
+.err-msg {
+  color: var(--color-text);
+}
+
 @media (min-width: 1024px) {}
 </style>

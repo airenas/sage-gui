@@ -9,10 +9,12 @@
         "thinking": "mąstau"
     },
     "input": {
-        "placeholder": "Rašykite arba spauskite ir kalbėkite ---->"
+        "placeholder": "Rašykite arba spauskite ir kalbėkite ---->",
+        "micError": "Nepavyko prijungti/panaudoti mikrofono:\n\n{err}"
     },
     "main": {
         "title": "Kalbančio Roboto Demo",
-        "connecting": "Jungiuosi prie {url}"
+        "connecting": "Jungiuosi prie {url}",
+        "close": "Uždaryti"
     }
 }

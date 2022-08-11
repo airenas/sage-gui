@@ -9,10 +9,12 @@
         "thinking": "thinking"
     },
     "input": {
-        "placeholder": "Write or press and speak ---->"
+        "placeholder": "Write or press and speak ---->",
+        "micError": "Can't connect to microphone:\n\n{err}"
     },
     "main": {
         "title": "Voice Bot Demo",
-        "connecting": "Connecting to {url}"
+        "connecting": "Connecting to {url}",
+        "close": "Close"
     }
 }
