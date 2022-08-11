@@ -5,6 +5,7 @@ const { connected } = storeToRefs(stateStore())
 </script>
 
 <script>
+import AudioProcessor from '../services/audio';
 
 export default {
   name: 'AudioInp',
@@ -17,11 +18,12 @@ export default {
       audioLenStr: "",
       audioID: "",
       sampleRate: 16000,
-      channels: 1,
+      channels: 1, // not prepared to work with a value 2
       store: stateStore(),
       timer: null,
       timeout: 10000,
       working: false,
+      resampler: null,
     };
   },
   methods: {
@@ -73,7 +75,16 @@ export default {
       }
     },
     start() {
-      navigator.mediaDevices.getUserMedia({ audio: { sampleRate: this.sampleRate, channelCount: this.channels }, video: false })
+      navigator.mediaDevices.getUserMedia({
+        audio: {
+          sampleRate: this.sampleRate, 
+          channelCount: this.channels,
+          echoCancellation: true,
+          autoGainControl: false,
+          noiseSuppression: true
+        }, 
+        video: false
+      })
         .then(this.startRecording).catch(e => {
           this.store.showError("Nepavyko prijungti/panaudoti mikrofono\n\n" + e)
         });
@@ -89,7 +100,8 @@ export default {
       const audioContext = window.AudioContext || window.webkitAudioContext;
       this.audioContext = new audioContext();
       const sampleRate = this.audioContext.sampleRate;
-      console.log("sampleRate", sampleRate);
+      console.log(`sampleRate: ${sampleRate}, targetRate: ${this.sampleRate}`);
+      this.resampler = new AudioProcessor(sampleRate, this.sampleRate);
       const volume = this.audioContext.createGain();
       const audioInput = this.audioContext.createMediaStreamSource(stream);
       audioInput.connect(volume);
@@ -100,32 +112,22 @@ export default {
       this.audioID = Date.now().toString();
       self.store.socketSrv.sendAudioEvent(true, this.audioID);
       this.mediaRecorder.onaudioprocess = function (e) {
-        console.log("recording");
-        var left = e.inputBuffer.getChannelData(0);
-        let la = new Float32Array(left);
-        if (la.length > 0) {
-          self.setAudioLen(self.audioLen + la.length, sampleRate)
-          self.lenData = self.lenData + la.length
+        console.debug("on audio data");
+        var buffer = e.inputBuffer.getChannelData(0);
+        if (buffer.length > 0) {
+          self.setAudioLen(self.audioLen + buffer.length, sampleRate)
+          self.lenData = self.lenData + buffer.length
           var end = Date.now();
           var rate = self.audioLen / (end - start);
-          console.log(`Rate: ${rate}, time: ${end - start} ms`);
-          const pcmData = self.convertToPCM(left);
+          console.debug(`Rate: ${rate}, time: ${end - start} ms`);
+          const pcmData = self.resampler.downsampleAndConvertToPCM(buffer);
+          console.debug(`len orig: ${buffer.length}, downsampled: ${pcmData.length}`);
           self.store.sendAudio(pcmData);
         }
       }
       volume.connect(this.mediaRecorder);
       this.mediaRecorder.connect(this.audioContext.destination);
       this.stream = stream;
-    },
-
-    convertToPCM(data) {
-      const res = new Int16Array(data.length);
-      for (var i = 0; i < data.length; i++) {
-        var n = data[i];
-        n = n < 0 ? n * 32768 : n * 32767;
-        res[i] = Math.max(-32768, Math.min(32768, n));
-      }
-      return res
     },
     toSecStr(sec) {
       const m = (sec / 60).toFixed(0)
@@ -142,9 +144,10 @@ export default {
 <template>
   <div class="mic-button">
     <v-btn class="ma-2" :class="audioLenStr === '' ? 'stopped' : 'recording'" rounded size="x-large"
-      @mousedown.left="mouseDown" @mouseup.left="mouseUp" @mouseleave="mouseLeave" :disabled="connected == false"><span class="recording-text">{{
-          audioLenStr
-      }}</span>
+      @mousedown.left="mouseDown" @mouseup.left="mouseUp" @mouseleave="mouseLeave" :disabled="connected == false"><span
+        class="recording-text">{{
+            audioLenStr
+        }}</span>
       <v-icon v-if="audioLenStr === ''">mic</v-icon>
     </v-btn>
   </div>
