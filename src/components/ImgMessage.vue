@@ -65,6 +65,9 @@ export default {
 
 .result-span {
   padding-left: 8px;
+  font-size: 110%;
+  font-weight: 500;
+  /* font-style: italic; */
 }
 
 @media (min-width: 1024px) {}

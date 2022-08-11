@@ -21,7 +21,7 @@ export default {
 
 <template>
   <div v-if="bot">
-    <v-row align="center">
+    <v-row align="center" class="bot-align">
       <div class="avatar"><span class="av-name">{{ $t('avatar.bot') }}</span></div>
       <div class="message">
         <slot></slot>
@@ -100,6 +100,11 @@ export default {
   justify-content: flex-end;
   margin-left: auto;
   margin-right: 0;
+  flex-wrap: wrap;
+}
+
+.bot-align {
+  flex-wrap: nowrap;
 }
 
 @media (min-width: 1024px) {}

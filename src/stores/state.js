@@ -54,7 +54,7 @@ export const stateStore = defineStore({
         }
         else {
           let l = this.messages.length;
-          const ml = 6;
+          const ml = 5;
           if (l > ml) {
             this.messages = this.messages.slice(l - ml)
             l = this.messages.length
