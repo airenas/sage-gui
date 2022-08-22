@@ -1,5 +1,6 @@
 #!/usr/bin/env sh
 set -e
 
-echo Starting nginx
-exec nginx -g 'daemon off;'
+echo Updating base href to ${BASE_HREF}
+cat /usr/share/nginx/html/index.html | envsubst '${BASE_HREF}' > /usr/share/nginx/html/index.html
+

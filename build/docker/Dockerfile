@@ -29,7 +29,7 @@ EXPOSE 8000
 
 COPY --from=builder /build/dist /usr/share/nginx/html
 COPY build/docker/nginx.conf /etc/nginx/conf.d/default.conf
-COPY build/docker/entrypoint.sh /app/entrypoint.sh
+COPY build/docker/entrypoint.sh /docker-entrypoint.d/40_entrypoint.sh
 
 USER root
 
