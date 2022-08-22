@@ -1,4 +1,4 @@
-[![Node.js CI](https://github.com/airenas/sage-gui/actions/workflows/node.js.yml/badge.svg)](https://github.com/airenas/sage-gui/actions/workflows/node.js.yml)
+[![Node.js CI](https://github.com/airenas/sage-gui/actions/workflows/node.js.yml/badge.svg)](https://github.com/airenas/sage-gui/actions/workflows/node.js.yml) [![Snyk vulnerabilities Tests](https://github.com/airenas/sage-gui/actions/workflows/snyk.yml/badge.svg)](https://github.com/airenas/sage-gui/actions/workflows/snyk.yml)
 
 # sage-gui
 
