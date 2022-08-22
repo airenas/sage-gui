@@ -11,6 +11,12 @@ Voice-to-voice bot GUI
 make init
 ```
 
+## Build docker image
+
+```sh
+cd build/docker && make dbuild
+```
+
 ### Compile and Hot-Reload for Development
 
 ```sh
