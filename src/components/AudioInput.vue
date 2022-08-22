@@ -158,7 +158,7 @@ export default {
 @import './../assets/base.css';
 
 .mic-button {
-  top: -5px;
+  top: 0px;
 }
 
 .recording {

@@ -47,7 +47,7 @@ export default {
 }
 
 .v-field__field {
-  padding-top: 10px !important;
+  padding-top: 0px !important;
 }
 
 @media (min-width: 1024px) {}
