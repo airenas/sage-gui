@@ -2,7 +2,7 @@ import { createPinia, setActivePinia } from 'pinia';
 // import { createApp } from 'vue';
 // import App from '../../App.vue';
 import { vuetify } from '../../plugins/vuetify';
-import TxtM from '../TxtM.vue';
+import TxtMessage from '../TxtMessage.vue';
 // import {createVuetify} from "vuetify"
 // import * as components from "vuetify/components"
 // import * as directives from "vuetify/directives"
@@ -11,7 +11,7 @@ import TxtM from '../TxtM.vue';
 // app.use(vuetify);
 //const vuetifyPl = vuetify
 
-describe('TxtM', () => {
+describe('TxtMessage', () => {
 
   const vuetifyPl = vuetify
   
@@ -20,21 +20,21 @@ describe('TxtM', () => {
   })
 
   it('playground', () => {
-    cy.mount(TxtM, {
+    cy.mount(TxtMessage, {
       global: {
         mocks: {
           $t: (msg) => { msg }
         }
       },
       plugins: {
-        vuetifyPl
+        vuetify: vuetifyPl
       },
       props: {},
     })
   })
 
   it('renders properly', () => {
-    cy.mount(TxtM, { props: { msg: 'Hello Cypress' } })
+    cy.mount(TxtMessage, { props: { msg: 'Hello Cypress' } })
     cy.get('h1').should('contain', 'Hello Cypress')
   })
 })

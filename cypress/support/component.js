@@ -19,7 +19,7 @@ import './commands';
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
 
-import { Cypress } from 'cypress';
+// import { Cypress } from 'cypress';
 import { mount } from 'cypress/vue';
 
 Cypress.Commands.add('mount', mount)
