@@ -2,7 +2,7 @@
 
 # sage-gui
 
-Voice to voice bot GUI
+Voice-to-voice bot GUI
 
 
 ## Project Setup
