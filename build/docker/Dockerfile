@@ -28,6 +28,7 @@ LABEL org.opencontainers.image.version=$BUILD_VERSION \
 EXPOSE 8000
 
 COPY --from=builder /build/dist /usr/share/nginx/html
+COPY --from=builder /build/dist/index.html /usr/share/index.html.in
 COPY build/docker/nginx.conf /etc/nginx/conf.d/default.conf
 COPY build/docker/entrypoint.sh /docker-entrypoint.d/40_entrypoint.sh
 
