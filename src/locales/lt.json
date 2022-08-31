@@ -4,7 +4,9 @@
         "user": "V"
     },
     "status": {
-        "waiting": "klausau",
+        "waiting": "laukiu",
+        "rec_listen": "klausau",
+        "rec_failed": "atpažintuvo klaida",
         "saying": "kalbu",
         "thinking": "mąstau"
     },

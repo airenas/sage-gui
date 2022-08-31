@@ -5,6 +5,8 @@
     },
     "status": {
         "waiting": "waiting",
+        "rec_listen": "listening",
+        "rec_failed": "recognizer error",
         "saying": "saying",
         "thinking": "thinking"
     },

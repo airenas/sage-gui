@@ -20,6 +20,7 @@
   --vt-c-text-dark-1: var(--vt-c-white);
   --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
   --vt-c-green: #4CAF50;
+  --vt-c-warn: #FFD54F;
 }
 
 /* semantic color variables for this project */
@@ -37,12 +38,13 @@
   --section-gap: 160px;
   --color-baloon-background: #b9b9b9;
   --color-baloon-background-user: #008ccf;
-  
+
   --color-baloon-text: var(--color-text);
   --color-baloon-text-user: var(--vt-c-white);
   --color-avatar: rgb(180, 129, 228);
   --color-avatar-text: var(--vt-c-white);
   --color-green: var(--vt-c-green);
+  --color-warn: var(--vt-c-warn);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -60,6 +62,7 @@
     --color-baloon-text-user: var(--vt-c-white-mute);
     --color-avatar: blueviolet;
     --color-avatar-text: var(--vt-c-text-dark-2);
+    --color-warn: #FF8F00;
   }
 }
 
