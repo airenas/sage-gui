@@ -20,7 +20,7 @@
   --vt-c-text-dark-1: var(--vt-c-white);
   --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
   --vt-c-green: #4CAF50;
-  --vt-c-warn: #FFD54F;
+  --vt-c-warn: #FF8F00;
 }
 
 /* semantic color variables for this project */
@@ -62,7 +62,7 @@
     --color-baloon-text-user: var(--vt-c-white-mute);
     --color-avatar: blueviolet;
     --color-avatar-text: var(--vt-c-text-dark-2);
-    --color-warn: #FF8F00;
+    --color-warn: var(--vt-c-warn);
   }
 }
 
