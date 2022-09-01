@@ -5,7 +5,7 @@ export const stateStore = defineStore({
   id: 'state',
   state: () => ({
     connected: false,
-    canListen: this.connected,
+    canListen: false,
     socket: null,
     messages: [],
     botStatus: '',
@@ -46,7 +46,7 @@ export const stateStore = defineStore({
         this.connected = false
       });
       this.socket.socket.on("message", (data) => {
-        console.log('got message', data);
+        console.debug('got message', data);
         if (data.type == "STATUS") {
           this.botStatus = data.data
           if (this.botStatus == "saying") {
@@ -68,7 +68,7 @@ export const stateStore = defineStore({
             l = this.messages.length
           }
           if (l > 0) {
-            console.log(data.who, this.messages[l - 1].who)
+            // console.debug(data.who, this.messages[l - 1].who)
             if (data.who !== this.messages[l - 1].who) {
               this.messages[l - 1].showDivider = true;
             }

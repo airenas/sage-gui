@@ -18,7 +18,7 @@ export default class SocketioService {
 
     sendTxt(txt) {
         if (this.socket) {
-            console.log('send ', txt);
+            console.debug('send ', txt);
             this.socket.emit('message', { type: "TEXT", data: txt });
         } else {
             console.warn("no socket")
@@ -27,7 +27,7 @@ export default class SocketioService {
 
     sendAudio(audio) {
         if (this.socket) {
-            console.log('send audio');
+            console.debug('send audio');
             this.socket.emit('message', { type: "AUDIO", data: audio });
         } else {
             console.warn("no socket")

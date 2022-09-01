@@ -13,7 +13,7 @@ import { useI18n } from 'vue-i18n';
 
 export default {
   mounted() {
-    console.log('mounted');
+    console.debug('mounted');
     const { t } = useI18n({
       inheritLocale: true,
       useScope: 'global'
@@ -21,7 +21,7 @@ export default {
     document.title = t('main.title');
   },
   created() {
-    console.log('created');
+    console.debug('created');
     stateStore().connect();
   },
   beforeUnmount() {
