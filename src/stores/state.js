@@ -5,6 +5,7 @@ export const stateStore = defineStore({
   id: 'state',
   state: () => ({
     connected: false,
+    canListen: this.connected,
     socket: null,
     messages: [],
     botStatus: '',
@@ -48,6 +49,12 @@ export const stateStore = defineStore({
         console.log('got message', data);
         if (data.type == "STATUS") {
           this.botStatus = data.data
+          if (this.botStatus == "saying") {
+            this.canListen = false
+          }
+          if (this.botStatus == "waiting") {
+            this.canListen = true
+          }
         } else if (data.type == "TEXT_RESULT") {
           // ignore
         } else if (data.who == "RECOGNIZER") {

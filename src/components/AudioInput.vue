@@ -1,7 +1,7 @@
 <script setup>
 import { storeToRefs } from 'pinia';
 import { stateStore } from '../stores/state';
-const { connected } = storeToRefs(stateStore())
+const { connected, canListen } = storeToRefs(stateStore())
 </script>
 
 <script>
@@ -145,7 +145,7 @@ export default {
 <template>
   <div class="mic-button">
     <v-btn class="ma-2" :class="audioLenStr === '' ? 'stopped' : 'recording'" rounded size="x-large"
-      @mousedown.left="mouseDown" @mouseup.left="mouseUp" @mouseleave="mouseLeave" :disabled="connected == false"><span
+      @mousedown.left="mouseDown" @mouseup.left="mouseUp" @mouseleave="mouseLeave" :disabled="connected == false || !canListen"><span
         class="recording-text">{{
             audioLenStr
         }}</span>
