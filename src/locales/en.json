@@ -4,11 +4,12 @@
         "user": "U"
     },
     "status": {
-        "waiting": "waiting",
+        "connected": "connected",
         "rec_listen": "listening",
         "rec_failed": "recognizer error",
         "saying": "saying",
-        "thinking": "thinking"
+        "thinking": "thinking",
+        "waiting": "waiting"
     },
     "input": {
         "placeholder": "Write or press and speak ---->",

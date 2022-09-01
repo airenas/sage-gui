@@ -38,6 +38,7 @@ export const stateStore = defineStore({
       this.socket.socket.on("connect", () => {
         console.log('connected');
         this.connected = true
+        this.botStatus = "connected"
       });
       this.socket.socket.on("disconnect", () => {
         console.log('disconnected');
