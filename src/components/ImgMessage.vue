@@ -67,8 +67,13 @@ export default {
   padding-left: 8px;
   font-size: 110%;
   font-weight: 500;
-  /* font-style: italic; */
+  overflow-wrap: break-word;
+  max-width: 70vw;
 }
 
-@media (min-width: 1024px) {}
+@media (min-width: 1024px) {
+  .result-span {
+    max-width: 40vw;
+  }
+}
 </style>
